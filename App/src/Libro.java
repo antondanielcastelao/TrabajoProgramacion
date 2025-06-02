@@ -3,7 +3,16 @@ public class Libro {
         private String titulo;
         private String autor;
         private int isbn;
-        private String fecha_publi;
+
+    public String getFecha_publi() {
+        return fecha_publi;
+    }
+
+    public void setFecha_publi(String fecha_publi) {
+        this.fecha_publi = fecha_publi;
+    }
+
+    private String fecha_publi;
 
         public Libro(String titulo, String autor, int isbn, String fecha_publi) {
             this.titulo = titulo;

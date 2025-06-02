@@ -65,11 +65,12 @@ public class Model {
          * @param nuevoTitulo Nuevo título
          * @param nuevoAutor Nuevo autor
          */
-        public static void editarLibro(String isbn, String nuevoTitulo, String nuevoAutor) {
+        public static void editarLibro(String isbn, String nuevoTitulo, String nuevoAutor, String nuevaFechaPubli) {
             Libro l = buscarPorISBN(isbn);
             if (l != null) {
                 l.setTitulo(nuevoTitulo);
                 l.setAutor(nuevoAutor);
+                l.setFecha_publi(nuevaFechaPubli);
             }
         }
 
@@ -92,7 +93,7 @@ public class Model {
                         }
                         break;
                     case 3: // Búsqueda por ISBN
-                        if (l.getIsbn().equalsIgnoreCase(valor)) {
+                        if (l.getIsbn() == Integer.parseInt(valor)) {
                             System.out.println(l);
                         }
                         break;
