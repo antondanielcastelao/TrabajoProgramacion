@@ -90,4 +90,13 @@ public class View {
 
     }
 
+    public static void msg(String texto, boolean error) {
+        String mensaje = "\n";
+        if (error) {
+            mensaje.concat("[!] ");
+        }
+        mensaje.concat(texto);
+
+        System.out.println(mensaje);
+    }
 }
