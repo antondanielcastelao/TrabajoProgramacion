@@ -19,7 +19,7 @@ public class Model {
                 Controller.enviarMsg("No hay libros disponibles.", true);
             } else {
                 for (Libro l : listaLibros) {
-                    Controller.enviarMsg(l, false);
+                    Controller.enviarMsg(l.toString(), false);
                 }
             }
         }
@@ -61,9 +61,9 @@ public class Model {
 
         /**
          * Edita los datos (título y autor) de un libro identificado por su ISBN.
-         * @param isbn ISBN del libro a editar
+         *
          * @param nuevoTitulo Nuevo título
-         * @param nuevoAutor Nuevo autor
+         * @param nuevoAutor  Nuevo autor
          */
         public static void editarLibro(int isbn, String nuevoTitulo, String nuevoAutor, String nuevaFechaPubli) {
             Libro l = buscarPorISBN(isbn);

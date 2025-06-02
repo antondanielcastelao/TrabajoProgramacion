@@ -31,7 +31,9 @@ public class View {
                     String autor = scanner.nextLine();
                     System.out.print("ISBN: ");
                     String isbn = scanner.nextLine();
-                    Libro nuevo = Controller.añadirLibro(titulo, autor, isbn);
+                    System.out.println("Fecha de publicación: ");
+                    String fecha_publi = scanner.nextLine();
+                    Libro nuevo = Controller.añadirLibro(titulo, autor, Integer.parseInt(isbn), fecha_publi);
                     System.out.println("Libro añadido: " + nuevo);
                     break;
 
@@ -55,7 +57,9 @@ public class View {
                         String nuevoTitulo = scanner.nextLine();
                         System.out.print("Nuevo autor (actual: " + libroAEditar.getAutor() + "): ");
                         String nuevoAutor = scanner.nextLine();
-                        Controller.editarLibro(isbnEditar, nuevoTitulo, nuevoAutor);
+                        System.out.println("Fecha de publicación: ");
+                        String nuevafecha_publi = scanner.nextLine();
+                        Controller.editarLibro(Integer.parseInt(isbnEditar), nuevoTitulo, nuevoAutor, nuevafecha_publi);
                         System.out.println("Libro actualizado.");
                     } else {
                         System.out.println("Libro no encontrado.");
@@ -74,7 +78,7 @@ public class View {
                 case 6:
                     System.out.print("Ruta del archivo (ej. data/libros.txt): ");
                     String ruta = scanner.nextLine();
-                    Controller.importarDesdeArchivo(ruta);
+                    // Controller.importarDesdeArchivo(ruta);
                     break;
 
                 case 0:
