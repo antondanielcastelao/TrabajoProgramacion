@@ -16,10 +16,10 @@ public class Model {
          */
         public static void listarLibros() {
             if (listaLibros.isEmpty()) {
-                System.out.println("No hay libros disponibles.");
+                Controller.enviarMsg("No hay libros disponibles.", true);
             } else {
                 for (Libro l : listaLibros) {
-                    System.out.println(l);
+                    Controller.enviarMsg(l, false);
                 }
             }
         }
@@ -50,9 +50,9 @@ public class Model {
          * @param isbn ISBN a buscar
          * @return El libro encontrado, o null si no existe
          */
-        public static Libro buscarPorISBN(String isbn) {
+        public static Libro buscarPorISBN(int isbn) {
             for (Libro l : listaLibros) {
-                if (l.getIsbn().equalsIgnoreCase(isbn)) {
+                if (l.getIsbn() == isbn) {
                     return l;
                 }
             }
@@ -65,7 +65,7 @@ public class Model {
          * @param nuevoTitulo Nuevo título
          * @param nuevoAutor Nuevo autor
          */
-        public static void editarLibro(String isbn, String nuevoTitulo, String nuevoAutor, String nuevaFechaPubli) {
+        public static void editarLibro(int isbn, String nuevoTitulo, String nuevoAutor, String nuevaFechaPubli) {
             Libro l = buscarPorISBN(isbn);
             if (l != null) {
                 l.setTitulo(nuevoTitulo);
@@ -84,21 +84,21 @@ public class Model {
                 switch (criterio) {
                     case 1: // Búsqueda por título
                         if (l.getTitulo().equalsIgnoreCase(valor)) {
-                            System.out.println(l);
+                            Controller.enviarMsg(l.toString(), false);
                         }
                         break;
                     case 2: // Búsqueda por autor
                         if (l.getAutor().equalsIgnoreCase(valor)) {
-                            System.out.println(l);
+                            Controller.enviarMsg(l.toString(), false);
                         }
                         break;
                     case 3: // Búsqueda por ISBN
                         if (l.getIsbn() == Integer.parseInt(valor)) {
-                            System.out.println(l);
+                            Controller.enviarMsg(l.toString(), false);
                         }
                         break;
                     default:
-                        System.out.println("Criterio no válido.");
+                        Controller.enviarMsg("Criterio no válido.", true);
                         break;
                 }
             }
@@ -111,7 +111,7 @@ public class Model {
          */
         public static void importarDesdeArchivo(String ruta) {
             // Aquí deberías implementar la lógica real con BufferedReader
-            System.out.println("Funcionalidad de importación no implementada (placeholder).");
+            Controller.enviarMsg("Funcionalidad de importación no implementada (placeholder).", true);
         }
     }
 
