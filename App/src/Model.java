@@ -30,8 +30,8 @@ public class Model {
          * @param isbn ISBN del libro
          * @return El libro recién creado
          */
-        public static Libro añadirLibro(String titulo, String autor, String isbn) {
-            Libro libro = new Libro(titulo, autor, isbn);
+        public static Libro añadirLibro(String titulo, String autor, int isbn, String fecha_publi) {
+            Libro libro = new Libro(titulo, autor, isbn, fecha_publi);
             listaLibros.add(libro);
             return libro;
         }
@@ -41,8 +41,8 @@ public class Model {
          * @param isbn ISBN del libro a eliminar
          * @return true si se eliminó, false si no se encontró
          */
-        public static boolean eliminarLibro(String isbn) {
-            return listaLibros.removeIf(libro -> libro.getIsbn().equalsIgnoreCase(isbn));
+        public static boolean eliminarLibro(int isbn) {
+            return listaLibros.removeIf(libro -> libro.getIsbn() == isbn);
         }
 
         /**
