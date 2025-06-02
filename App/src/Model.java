@@ -102,7 +102,6 @@ public class Model {
                 }
             }
         }
-
         /**
          * Método placeholder para importar libros desde un archivo externo.
          * De momento solo muestra un mensaje de que la funcionalidad no está implementada.
