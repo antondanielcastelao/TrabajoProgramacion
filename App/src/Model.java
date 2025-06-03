@@ -10,19 +10,36 @@ public class Model {
         // Lista que almacena los libros de la biblioteca
         private static List<Libro> listaLibros = new ArrayList<>();
 
+        // este codigo crea un par de libros de prueba en memoria
+        static {
+            anhadirLibro(
+                    "Las aventuras de perico de los palotes",
+                    "Jose de troya",
+                    123456789,
+                    "11/11/11");
+            anhadirLibro(
+                    "Prueba",
+                    "yo",
+                    123,
+                    "11/11/12");
+        }
         /**
          * Lista todos los libros actualmente registrados.
          * Si la lista está vacía, informa al usuario.
          */
-        public static void listarLibros() {
+        public static String listarLibros() {
+            String s = "---- Lista de libros ----\n";
             if (listaLibros.isEmpty()) {
                 Controller.enviarMsg("No hay libros disponibles.", true);
+                return "";
             } else {
                 for (Libro l : listaLibros) {
-                    Controller.enviarMsg(l.toString(), false);
+                    s += l.toString() + "\n";
                 }
             }
+            return s;
         }
+
         /**
          * Añade un nuevo libro a la lista.
          * @param titulo Título del libro
@@ -30,10 +47,9 @@ public class Model {
          * @param isbn ISBN del libro
          * @return El libro recién creado
          */
-        public static Libro añadirLibro(String titulo, String autor, int isbn, String fecha_publi) {
+        public static boolean anhadirLibro(String titulo, String autor, int isbn, String fecha_publi) {
             Libro libro = new Libro(titulo, autor, isbn, fecha_publi);
-            listaLibros.add(libro);
-            return libro;
+            return listaLibros.add(libro);
         }
 
         /**

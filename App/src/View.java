@@ -10,8 +10,8 @@ public class View {
             System.out.println("1 - Listar libros disponibles");
             System.out.println("2 - Añadir un libro");
             System.out.println("3 - Borrar un libro");
-            System.out.println("4 - Editar datos de un libro (título, autor, ISBN, etc.)");
-            System.out.println("5 - Buscar libro por título, autor o ISBN");
+            System.out.println("4 - Editar datos de un libro");
+            System.out.println("5 - Buscar libro");
             System.out.println("6 - Importar lista de libros desde un archivo");
             System.out.println("0 - Salir");
             System.out.print("Elige una opción: ");
@@ -21,7 +21,7 @@ public class View {
 
             switch (opcion) {
                 case 1:
-                    Controller.listarLibros();
+                    msg(Controller.listarLibros(), false);
                     break;
 
                 case 2:
@@ -31,15 +31,19 @@ public class View {
                     String autor = scanner.nextLine();
                     System.out.print("ISBN: ");
                     String isbn = scanner.nextLine();
-                    System.out.println("Fecha de publicación: ");
+                    System.out.print("Fecha de publicación: ");
                     String fecha_publi = scanner.nextLine();
-                    Libro nuevo = Controller.añadirLibro(titulo, autor, Integer.parseInt(isbn), fecha_publi);
-                    System.out.println("Libro añadido: " + nuevo);
+                    boolean engadido = Controller.anhadirLibro(titulo, autor, Integer.parseInt(isbn), fecha_publi);
+                    if (engadido) {
+                        msg("Libro añadido", false);
+                    } else {
+                        msg("El libro no se ha podido añadir ya que hay otro con el mismo ISBN", true);
+                    }
                     break;
 
                 case 3:
                     System.out.print("Introduce el ISBN del libro a eliminar: ");
-                    String isbnEliminar = scanner.nextLine();
+                    int isbnEliminar = Integer.parseInt(scanner.nextLine());
                     boolean eliminado = Controller.eliminarLibro(isbnEliminar);
                     if (eliminado) {
                         System.out.println("Libro eliminado correctamente.");
@@ -50,16 +54,17 @@ public class View {
 
                 case 4:
                     System.out.print("Introduce el ISBN del libro a editar: ");
-                    String isbnEditar = scanner.nextLine();
+                    int isbnEditar = Integer.parseInt(scanner.nextLine());
                     Libro libroAEditar = Controller.buscarPorISBN(isbnEditar);
+
                     if (libroAEditar != null) {
                         System.out.print("Nuevo título (actual: " + libroAEditar.getTitulo() + "): ");
                         String nuevoTitulo = scanner.nextLine();
                         System.out.print("Nuevo autor (actual: " + libroAEditar.getAutor() + "): ");
                         String nuevoAutor = scanner.nextLine();
-                        System.out.println("Fecha de publicación: ");
+                        System.out.println("Fecha de publicación (actual: "+libroAEditar.getFecha_publi() + "): ");
                         String nuevafecha_publi = scanner.nextLine();
-                        Controller.editarLibro(Integer.parseInt(isbnEditar), nuevoTitulo, nuevoAutor, nuevafecha_publi);
+                        Controller.editarLibro(isbnEditar, nuevoTitulo, nuevoAutor, nuevafecha_publi);
                         System.out.println("Libro actualizado.");
                     } else {
                         System.out.println("Libro no encontrado.");
@@ -68,8 +73,7 @@ public class View {
 
                 case 5:
                     System.out.print("Buscar por (1. Título / 2. Autor / 3. ISBN): ");
-                    int criterio = scanner.nextInt();
-                    scanner.nextLine(); // limpiar buffer
+                    int criterio = Integer.parseInt(scanner.nextLine());
                     System.out.print("Introduce el valor de búsqueda: ");
                     String valor = scanner.nextLine();
                     Controller.buscarLibro(criterio, valor);
@@ -97,9 +101,9 @@ public class View {
     public static void msg(String texto, boolean error) {
         String mensaje = "\n";
         if (error) {
-            mensaje.concat("[!] ");
+            mensaje += "[!] ";
         }
-        mensaje.concat(texto);
+        mensaje += texto;
 
         System.out.println(mensaje);
     }
