@@ -23,17 +23,18 @@ public class Model {
                     123,
                     "11/11/12");
         }
-        /**
-         * Lista todos los libros actualmente registrados.
-         * Si la lista está vacía, informa al usuario.
-         */
-        public static String listarLibros() {
+
+    /**
+     *
+     * @return texto del listado de libros
+     */
+    public static String listarLibros() {
             String s = "---- Lista de libros ----\n";
-            if (listaLibros.isEmpty()) {
+            if (listaLibros.isEmpty()) { // si la lista esta vacia envia un error de que no hay libros cargados en memoria
                 Controller.enviarMsg("No hay libros disponibles.", true);
                 return "";
             } else {
-                for (Libro l : listaLibros) {
+                for (Libro l : listaLibros) { // si no concatena los datos de cada libro en un string
                     s += l.toString() + "\n";
                 }
             }
@@ -45,7 +46,7 @@ public class Model {
          * @param titulo Título del libro
          * @param autor Autor del libro
          * @param isbn ISBN del libro
-         * @return El libro recién creado
+         * @return true si se pudo crear
          */
         public static boolean anhadirLibro(String titulo, String autor, int isbn, String fecha_publi) {
             Libro libro = new Libro(titulo, autor, isbn, fecha_publi);
@@ -92,29 +93,30 @@ public class Model {
 
         /**
          * Busca libros por un criterio (1: título, 2: autor, 3: ISBN) y muestra los que coincidan.
+         * Recorre el arraylist de libros y en cada caso, compara el parametro del libro con el buscado
          * @param criterio Criterio de búsqueda
          * @param valor Valor a buscar
          */
-        public static String buscarLibro(int criterio, String valor) {
+        public static Libro buscarLibro(int criterio, String valor) {
             String criterioString = "";
             for (Libro l : listaLibros) {
                 switch (criterio) {
                     case 1: // Búsqueda por título
                         criterioString = "titulo";
                         if (l.getTitulo().equalsIgnoreCase(valor)) {
-                            return l.toString();
+                            return l;
                         }
                         break;
                     case 2: // Búsqueda por autor
                         criterioString = "autor";
                         if (l.getAutor().equalsIgnoreCase(valor)) {
-                            return l.toString();
+                            return l;
                         }
                         break;
                     case 3: // Búsqueda por ISBN
                         criterioString = "ISBN";
                         if (l.getIsbn() == Integer.parseInt(valor)) {
-                            return l.toString();
+                            return l;
 
                         }
                         break;
@@ -124,7 +126,7 @@ public class Model {
                 }
             }
             Controller.enviarMsg("No hay ningun libro con " + valor + " como " + criterioString, true);
-            return "";
+            return null;
         }
         /**
          * Método placeholder para importar libros desde un archivo externo.

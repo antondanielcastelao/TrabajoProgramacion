@@ -4,7 +4,7 @@ public class Libro {
         private String autor;
         private int isbn;
         private String fecha_publi;
-
+        // constructor
         public Libro(String titulo, String autor, int isbn, String fecha_publi) {
             this.titulo = titulo;
             this.autor = autor;
@@ -12,7 +12,7 @@ public class Libro {
             this.fecha_publi = fecha_publi;
         }
 
-
+        // getters y setters
         public String getTitulo() {
             return titulo;
         }

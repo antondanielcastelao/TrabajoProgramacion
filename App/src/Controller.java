@@ -15,6 +15,14 @@ public class Controller {
         return Model.listarLibros();
     }
 
+    /**
+     * Manda la señal al controller para crear un libro
+     * @param titulo
+     * @param autor
+     * @param isbn
+     * @param fecha_publi
+     * @return true si lo pudo crear false
+     */
     public static boolean anhadirLibro(String titulo, String autor, int isbn, String fecha_publi) {
         if (Model.buscarPorISBN(isbn) != null){ // si encuentra el libro al buscarlo, devuelve false
                                                 // ya que no deben insertarse 2 libros con mismo ISBN
@@ -24,19 +32,42 @@ public class Controller {
         }
     }
 
+    /**
+     * LLama al controller para eliminar un libro por ISBN
+     * @param isbnEliminar
+     * @return true si se ha conseguido eliminar false si no.
+     */
     public static boolean eliminarLibro(int isbnEliminar) {
         return Model.eliminarLibro(isbnEliminar);
     }
 
+    /**
+     *
+     * @param isbnEditar
+     * @return Devuelve la instancia del libro buscado por ISBN
+     */
     public static Libro buscarPorISBN(int isbnEditar) {
         return Model.buscarPorISBN(isbnEditar);
     }
 
+    /**
+     * Modifica los parametros de un libro
+     * @param isbnEditar
+     * @param nuevoTitulo
+     * @param nuevoAutor
+     * @param fecha_publi
+     */
     public static void editarLibro(int isbnEditar, String nuevoTitulo, String nuevoAutor, String fecha_publi) {
          Model.editarLibro(isbnEditar, nuevoTitulo, nuevoAutor, fecha_publi);
     }
 
-    public static String buscarLibro(int criterio, String valor) {
+    /**
+     * LLama al Model para buscar un libro en memoria
+     * @param criterio 1 titulo, 2 autor, 3 ISBN
+     * @param valor
+     * @return Instancia del libro a buscar
+     */
+    public static Libro buscarLibro(int criterio, String valor) {
         return Model.buscarLibro(criterio, valor);
     }
 }

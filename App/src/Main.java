@@ -3,11 +3,6 @@
 public class Main {
     public static void main(String[] args) {
         // Al abrir el programa solo se ejecutara el menu definido en view
-
-        /*
-            To - Do
-            - Javadoc y mas comentarios
-         */
         View.menu();
     }
 }

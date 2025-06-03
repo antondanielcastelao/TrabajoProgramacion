@@ -5,7 +5,7 @@ public class View {
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
-        do {
+        do { // mientras la opcion no sea 0 (salir) se mantiene ejecutando el menu en bucle
             System.out.println("\n--- MENÚ ---");
             System.out.println("1 - Listar libros disponibles");
             System.out.println("2 - Añadir un libro");
@@ -20,11 +20,11 @@ public class View {
             scanner.nextLine(); // Limpiar buffer
 
             switch (opcion) {
-                case 1:
-                    msg(Controller.listarLibros(), false);
+                case 1: // lista libros
+                    msg(Controller.listarLibros(), false); // imprime por pantalla la lista de libros pidiendola al controller
                     break;
 
-                case 2:
+                case 2: // añade libro
                     System.out.print("Título: ");
                     String titulo = scanner.nextLine();
                     System.out.print("Autor: ");
@@ -41,7 +41,7 @@ public class View {
                     }
                     break;
 
-                case 3:
+                case 3: // borra libro
                     System.out.print("Introduce el ISBN del libro a eliminar: ");
                     int isbnEliminar = Integer.parseInt(scanner.nextLine());
                     boolean eliminado = Controller.eliminarLibro(isbnEliminar);
@@ -52,7 +52,7 @@ public class View {
                     }
                     break;
 
-                case 4:
+                case 4: // edita libro
                     System.out.print("Introduce el ISBN del libro a editar: ");
                     int isbnEditar = Integer.parseInt(scanner.nextLine());
                     Libro libroAEditar = Controller.buscarPorISBN(isbnEditar);
@@ -71,15 +71,15 @@ public class View {
                     }
                     break;
 
-                case 5:
+                case 5: // busca libro
                     System.out.print("Buscar por (1. Título / 2. Autor / 3. ISBN): ");
                     int criterio = Integer.parseInt(scanner.nextLine());
                     System.out.print("Introduce el valor de búsqueda: ");
                     String valor = scanner.nextLine();
-                    System.out.println("\n" + Controller.buscarLibro(criterio, valor));
+                    System.out.println("\n" + Controller.buscarLibro(criterio, valor).toString());
                     break;
 
-                case 6:
+                case 6: // importar desde archivo
                     System.out.print("Ruta del archivo (ej. data/libros.txt): ");
                     String ruta = scanner.nextLine();
                     // Controller.importarDesdeArchivo(ruta);
@@ -95,6 +95,7 @@ public class View {
             }
 
         } while (opcion != 0);
+        scanner.close();
 
     }
 
