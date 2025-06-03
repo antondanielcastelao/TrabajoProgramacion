@@ -6,8 +6,6 @@ public class Main {
 
         /*
             To - Do
-            - Al añadir un libro comprobar que no exista uno con el mismo ISBN
-            - Hacer que si al buscar no encuentra ningun libro, ponga "Sin resultados"
             - Javadoc y mas comentarios
          */
         View.menu();

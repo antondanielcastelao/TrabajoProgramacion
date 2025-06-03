@@ -76,7 +76,7 @@ public class View {
                     int criterio = Integer.parseInt(scanner.nextLine());
                     System.out.print("Introduce el valor de búsqueda: ");
                     String valor = scanner.nextLine();
-                    Controller.buscarLibro(criterio, valor);
+                    System.out.println("\n" + Controller.buscarLibro(criterio, valor));
                     break;
 
                 case 6:

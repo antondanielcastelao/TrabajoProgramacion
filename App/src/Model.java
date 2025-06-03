@@ -95,22 +95,27 @@ public class Model {
          * @param criterio Criterio de búsqueda
          * @param valor Valor a buscar
          */
-        public static void buscarLibro(int criterio, String valor) {
+        public static String buscarLibro(int criterio, String valor) {
+            String criterioString = "";
             for (Libro l : listaLibros) {
                 switch (criterio) {
                     case 1: // Búsqueda por título
+                        criterioString = "titulo";
                         if (l.getTitulo().equalsIgnoreCase(valor)) {
-                            Controller.enviarMsg(l.toString(), false);
+                            return l.toString();
                         }
                         break;
                     case 2: // Búsqueda por autor
+                        criterioString = "autor";
                         if (l.getAutor().equalsIgnoreCase(valor)) {
-                            Controller.enviarMsg(l.toString(), false);
+                            return l.toString();
                         }
                         break;
                     case 3: // Búsqueda por ISBN
+                        criterioString = "ISBN";
                         if (l.getIsbn() == Integer.parseInt(valor)) {
-                            Controller.enviarMsg(l.toString(), false);
+                            return l.toString();
+
                         }
                         break;
                     default:
@@ -118,6 +123,8 @@ public class Model {
                         break;
                 }
             }
+            Controller.enviarMsg("No hay ningun libro con " + valor + " como " + criterioString, true);
+            return "";
         }
         /**
          * Método placeholder para importar libros desde un archivo externo.

@@ -36,7 +36,7 @@ public class Controller {
          Model.editarLibro(isbnEditar, nuevoTitulo, nuevoAutor, fecha_publi);
     }
 
-    public static void buscarLibro(int criterio, String valor) {
-        Model.buscarLibro(criterio, valor);
+    public static String buscarLibro(int criterio, String valor) {
+        return Model.buscarLibro(criterio, valor);
     }
 }
