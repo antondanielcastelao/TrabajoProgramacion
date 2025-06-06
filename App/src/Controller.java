@@ -75,4 +75,7 @@ public class Controller {
     public static void cargaLibros() { Model.cargaLibros(); }
     public static void subeLibros() { Model.subeLibros(); }
 
+    public static void importarDesdeArchivo(String ruta) {
+        Model.importarDesdeArchivo(ruta);
+    }
 }

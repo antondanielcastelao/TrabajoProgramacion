@@ -84,9 +84,9 @@ public class View {
                     break;
 
                 case 6: // importar desde archivo
-                    System.out.print("Ruta del archivo (ej. data/libros.txt): ");
+                    System.out.print("Ruta del archivo CSV separado por , (ej. data/libros.csv): ");
                     String ruta = scanner.nextLine();
-                    // Controller.importarDesdeArchivo(ruta);
+                    Controller.importarDesdeArchivo(ruta);
                     break;
 
                 case 0:

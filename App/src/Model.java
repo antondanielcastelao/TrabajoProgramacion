@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,7 +125,37 @@ public class Model {
          */
         public static void importarDesdeArchivo(String ruta) {
             // Aquí deberías implementar la lógica real con BufferedReader
-            Controller.enviarMsg("Funcionalidad de importación no implementada (placeholder).", true);
+            // Controller.enviarMsg("Funcionalidad de importación no implementada (placeholder).", true);
+
+            // abrimos el archivo a importar con buffer reader
+            try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+                // comprobamos primero que el csv dispone de la cabecera
+                String[] cabecera = br.readLine().split(",");
+                if (!cabecera[0].equals("isbn")
+                        || !cabecera[1].equals("titulo")
+                        || !cabecera[2].equals("autor")
+                        || !cabecera[3].equals("fecha_publi")) {
+                    // no existe la cabecera, manda un mensaje de error
+                    Controller.enviarMsg("El csv no dispone de la cabecera isbn,titulo,autor,fecha_publi", true);
+                } else {
+                    // existe la cabecera
+                    String linea;
+                    while ( (linea = br.readLine()) != null ) {
+                        String[] pedazos = linea.split(","); // dividimos la linea por el separador
+                        // recorremos el archivo creando un libro en la coleccion por linea
+                        anhadirLibro(
+                                pedazos[1], // titulo
+                                pedazos[2], // autor
+                                Integer.parseInt(pedazos[0]), // isbn
+                                pedazos[3] // fecha_publi
+                        );
+
+                    }
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     /**
