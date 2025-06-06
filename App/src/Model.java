@@ -11,20 +11,6 @@ public class Model {
         // Lista que almacena los libros de la biblioteca
         private static List<Libro> listaLibros = new ArrayList<>();
 
-        // este codigo crea un par de libros de prueba en memoria
-        static {
-            anhadirLibro(
-                    "Las aventuras de perico de los palotes",
-                    "Jose de troya",
-                    123456789,
-                    "11/11/11");
-            anhadirLibro(
-                    "Prueba",
-                    "yo",
-                    123,
-                    "11/11/12");
-        }
-
     /**
      *
      * @return texto del listado de libros
