@@ -70,4 +70,9 @@ public class Controller {
     public static Libro buscarLibro(int criterio, String valor) {
         return Model.buscarLibro(criterio, valor);
     }
+
+    // funciones para comunicarse con el model para la BD
+    public static void cargaLibros() { Model.cargaLibros(); }
+    public static void subeLibros() { Model.subeLibros(); }
+
 }

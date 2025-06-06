@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 public class View {
     public static void menu() {
+        // antes de mostrar nada,
+        // pide al controller cargar los datos de la DB
+        Controller.cargaLibros();
+
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
@@ -96,6 +100,9 @@ public class View {
 
         } while (opcion != 0);
         scanner.close();
+        // Pide al controller subir
+        // los cambios hechos a la coleccion de libros
+        Controller.subeLibros();
 
     }
 

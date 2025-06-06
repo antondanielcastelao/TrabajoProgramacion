@@ -1,3 +1,4 @@
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,5 +138,61 @@ public class Model {
             // Aquí deberías implementar la lógica real con BufferedReader
             Controller.enviarMsg("Funcionalidad de importación no implementada (placeholder).", true);
         }
+
+    /**
+     * carga en memoria todos los libros de la base de datos
+     */
+    public static void cargaLibros() {
+        try (Connection db = DBConnection.getConnection()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM libros");
+
+            while (rs.next()) {
+                int ISBN = rs.getInt("isbn");
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String fecha_publi = rs.getString("fecha_publi");
+
+                listaLibros.add(new Libro(titulo, autor, ISBN, fecha_publi));
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Esta funcion se encarga de insertar los datos en memoria a la tabla de libros
+     */
+    public static void subeLibros() {
+
+        // primero VACIA la tabla antes de insertar
+
+        try (Connection db = DBConnection.getConnection()) {
+            Statement st = db.createStatement();
+            st.executeUpdate("DELETE FROM libros");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        // por cada libro en memoria, lo insertamos en la BD
+        String consulta = "INSERT INTO libros (isbn, titulo, autor, fecha_publi)  values (?, ?, ?, ?)";
+        for (Libro l : listaLibros) {
+            try (Connection con = DBConnection.getConnection()) {
+                // hacemos un statement preparado para sustituir los valores
+                // y evitar inyecciones de codigo sql al concatenar
+                PreparedStatement st = con.prepareStatement(consulta);
+                st.setInt(1, l.getIsbn());
+                st.setString(2, l.getTitulo());
+                st.setString(3, l.getAutor());
+                st.setString(4, l.getFecha_publi());
+                st.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
     }
 

@@ -3,6 +3,7 @@
 public class Main {
     public static void main(String[] args) {
         // Al abrir el programa solo se ejecutara el menu definido en view
+
         View.menu();
     }
 }
